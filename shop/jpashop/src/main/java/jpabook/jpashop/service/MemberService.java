@@ -33,7 +33,7 @@ public class MemberService {
     }
 
 
-    // 중복 처리
+    // 중복 예외 처리
     private void validateDuplicateMember(Member member) {
         // EXCEPTION - 예외 처리
         List<Member> finMembers = memberRepository.findByName(member.getName());
