@@ -27,11 +27,11 @@ public class Article extends BaseTimeEntity{
     @Column(nullable = false)
     private int view;
 
-    @Column(nullable = false)
     @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @OneToMany
+    @OneToMany(mappedBy = "article")
     private List<Comment> comments = new ArrayList<>();
 
 }

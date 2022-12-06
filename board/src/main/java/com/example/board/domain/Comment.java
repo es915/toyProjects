@@ -20,8 +20,10 @@ public class Comment extends BaseTimeEntity{
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
     @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 }

@@ -29,10 +29,10 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "member")
     private List<Article> articles = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
 
 }
