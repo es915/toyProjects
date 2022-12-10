@@ -13,7 +13,6 @@ import java.util.List;
 @Getter @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "member")
 public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +28,10 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "Member")
     private List<Article> articles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "Member")
     private List<Comment> comments = new ArrayList<>();
 
 }

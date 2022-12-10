@@ -11,7 +11,6 @@ import java.util.List;
 @Entity @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "article")
 public class Article extends BaseTimeEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +26,20 @@ public class Article extends BaseTimeEntity{
     @Column(nullable = false)
     private int view;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "Article")
     private List<Comment> comments = new ArrayList<>();
 
+    public void setMember(Member member) {
+        this.member = member;
+        member.getArticles().add(this);
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setArticle(this);
+    }
 }

@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Entity @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "comment")
 public class Comment extends BaseTimeEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +18,16 @@ public class Comment extends BaseTimeEntity{
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
 }
