@@ -1,6 +1,7 @@
 package com.example.board.entity;
 
 import com.example.board.dto.BoardDTO;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Table(name="board_table")
 @NoArgsConstructor
+@AllArgsConstructor
 public class BoardEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +42,19 @@ public class BoardEntity extends BaseEntity{
         );
     }
 
+    // @AllArgsConstructor
+    public static BoardEntity toUpdateEntity(BoardDTO boardDTO) {
+        return new BoardEntity(
+                boardDTO.getId(),
+                boardDTO.getBoardWriter(),
+                boardDTO.getBoardPass(),
+                boardDTO.getBoardTitle(),
+                boardDTO.getBoardContents(),
+                boardDTO.getBoardHits()
+        );
+    }
+
+    // toSaveEntity 생성자
     private BoardEntity(String boardWriter, String boardPass, String boardTitle, String boardContents) {
         this.boardWriter = boardWriter;
         this.boardPass = boardPass;
@@ -47,5 +62,4 @@ public class BoardEntity extends BaseEntity{
         this.boardContents = boardContents;
         this.boardHits = 0; // 디폴트 값
     }
-
 }
